@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paris Relief IGN POC</title>
+    <meta
+      name="description"
+      content="POC 3D de Paris avec orthophoto IGN et terrain 3D optimise pour la fluidite."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cesium.com/downloads/cesiumjs/releases/1.139.1/Build/Cesium/Widgets/widgets.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app-shell">
+      <div id="viewer"></div>
+
+      <aside class="hud">
+        <div class="panel glass">
+          <p class="eyebrow">IGN Geoplateforme</p>
+          <h1>Paris Relief</h1>
+          <p class="lede">
+            Viewer plus fluide avec Cesium, orthophoto IGN et vrai terrain 3D sur
+            Paris.
+          </p>
+
+          <div id="protocol-warning" class="banner hidden">
+            Ouvre ce projet via <code>http://localhost</code>, pas en
+            <code>file://</code>, sinon les flux distants seront bloques.
+          </div>
+
+          <section class="section">
+            <div class="section-head">
+              <h2>Presets</h2>
+              <span class="hint">Relief parisien</span>
+            </div>
+            <div id="preset-list" class="preset-list"></div>
+          </section>
+
+          <section class="section">
+            <div class="section-head">
+              <h2>Scene</h2>
+              <span class="hint">Carte + terrain</span>
+            </div>
+
+            <label class="toggle">
+              <input id="toggle-ortho" type="checkbox" checked />
+              <span>Orthophoto IGN</span>
+            </label>
+
+            <label class="range-field" for="exaggeration">
+              <span>Relief</span>
+              <strong id="exaggeration-value">180%</strong>
+            </label>
+            <input
+              id="exaggeration"
+              type="range"
+              min="100"
+              max="260"
+              step="10"
+              value="180"
+            />
+
+            <div class="section-head section-head-tight">
+              <h2>Camera</h2>
+              <span class="hint">Angles</span>
+            </div>
+
+            <div class="button-row">
+              <button id="camera-top" class="preset-btn compact-btn" type="button">
+                <strong>Vue dessus</strong>
+                <span>Presque verticale</span>
+              </button>
+              <button id="camera-oblique" class="preset-btn compact-btn" type="button">
+                <strong>Vue oblique</strong>
+                <span>Relief plus lisible</span>
+              </button>
+            </div>
+
+            <label class="range-field" for="camera-heading">
+              <span>Cap</span>
+              <strong id="camera-heading-value">18°</strong>
+            </label>
+            <input
+              id="camera-heading"
+              type="range"
+              min="0"
+              max="359"
+              step="1"
+              value="18"
+            />
+
+            <label class="range-field" for="camera-pitch">
+              <span>Inclinaison</span>
+              <strong id="camera-pitch-value">88°</strong>
+            </label>
+            <input
+              id="camera-pitch"
+              type="range"
+              min="20"
+              max="89"
+              step="1"
+              value="88"
+            />
+
+            <p class="control-note">
+              Souris: glisser gauche pour orbiter, molette pour zoomer,
+              <kbd>Shift</kbd> + glisser gauche pour incliner.
+            </p>
+          </section>
+
+          <section class="section">
+            <div class="section-head">
+              <h2>Etat</h2>
+              <span class="hint">Live</span>
+            </div>
+            <dl class="stats">
+              <div>
+                <dt>Camera</dt>
+                <dd id="camera-stats">Initialisation...</dd>
+              </div>
+              <div>
+                <dt>Moteur</dt>
+                <dd id="render-mode">Preparation...</dd>
+              </div>
+              <div>
+                <dt>Point terrain</dt>
+                <dd id="pinned-altitude">Clique sur le terrain...</dd>
+              </div>
+              <div>
+                <dt>Couverture</dt>
+                <dd id="coverage-stats">Paris</dd>
+              </div>
+              <div>
+                <dt>Chargement</dt>
+                <dd id="load-status">Preparation du viewer...</dd>
+              </div>
+            </dl>
+          </section>
+
+          <footer class="footer-note">
+            Moteur:
+            <a href="https://cesium.com/learn/cesiumjs-learn/" target="_blank" rel="noreferrer">CesiumJS</a>
+            . Sources:
+            <a
+              href="https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/"
+              target="_blank"
+              rel="noreferrer"
+              >services IGN</a
+            >.
+          </footer>
+        </div>
+      </aside>
+
+      <div id="credits"></div>
+    </div>
+
+    <script
+      src="https://cesium.com/downloads/cesiumjs/releases/1.139.1/Build/Cesium/Cesium.js"
+      defer
+    ></script>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
